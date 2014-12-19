@@ -1,0 +1,29 @@
+{
+  "name": "temp-node-example",
+  "version": "0.0.0",
+  "description": "Temp Node Example",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rahulch95/temp-node-example.git"
+  },
+  "keywords": [
+    "npm",
+    "nodejs",
+    "js",
+    "express"
+  ],
+  "author": "Rahul Chaudhary",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rahulch95/temp-node-example/issues"
+  },
+  "dependencies": {
+    "cheerio": "~0.18.0",
+    "express": "~4.10.6",
+    "nodemon": "~1.2.1"
+  }
+}
