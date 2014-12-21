@@ -6,14 +6,14 @@ var express = require('express'),
     cheerio = require('cheerio'),
     io = require('socket.io')(server);
 
-io.configure(function () { 
-  io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 10); 
-});
+// io.configure(function () { 
+//   io.set("transports", ["xhr-polling"]); 
+//   io.set("polling duration", 10); 
+// });
 
 io.on('connection', function(socket){
-  // io.set("transports", ["xhr-polling"]);
-  // io.set("polling duration", 10);
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
