@@ -4,9 +4,11 @@ var express = require('express'),
     server = http.createServer(app),
     request_lib = require('request'),
     cheerio = require('cheerio'),
-    io = require('socket.io').listen(server);
+    io = require('socket.io')(server);
 
 io.on('connection', function(socket){
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
