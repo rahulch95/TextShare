@@ -11,8 +11,7 @@ var express = require('express'),
 var clients = {};
 
 io.sockets.on('connection', function(socket){
-    io.set("transports", ["xhr-polling"]); 
-    io.set("polling duration", 20); 
+    
     socket.on('chat message', function(msg){
       io.sockets.in(socket.room).emit('chat message', msg);
     });
