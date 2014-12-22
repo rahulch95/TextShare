@@ -39,9 +39,9 @@
 			socket.on('chat message', function(msg){
 				// $('#messages').append($('<li>').text(msg));
 				var cursorPosition = $('#textarea').getCursorPosition();
-				alert(cursorPosition);
 				$('#textarea').val(msg);
-				$('#textarea').setCursorPosition(cursorPosition);
+				setCaretToPos(document.getElementById("textarea"), cursorPosition);
+
 			});
 
 			// whenever something is sent emit it to room
@@ -71,45 +71,23 @@
 				        return pos;
 				    }
 			});
-			// new function ($, undefined) {
-			//     $.fn.getCursorPosition = function() {
-			//         var el = $(this).get(0);
-			//         var pos = 0;
-			//         if('selectionStart' in el) {
-			//             pos = el.selectionStart;
-			//         } else if('selection' in document) {
-			//             el.focus();
-			//             var Sel = document.selection.createRange();
-			//             var SelLength = document.selection.createRange().text.length;
-			//             Sel.moveStart('character', -el.value.length);
-			//             pos = Sel.text.length - SelLength;
-			//         }
-			//         return pos;
-			// 	}
-			// }(jQuery);
-			jQuery.fn.extend({
-				setCursorPosition: function(position){
-				    if(this.length == 0) return this;
-				    return $(this).setSelection(position, position);
-				}
-			});
-			// new function($) {
-			//     $.fn.setCursorPosition = function(pos) {
-			// 	    if (this.setSelectionRange) {
-			// 		    this.setSelectionRange(pos, pos);
-			// 	    } else if (this.createTextRange) {
-			// 	    	var range = this.createTextRange();
-			// 	     	range.collapse(true);
-			// 	     	if(pos < 0) {
-			// 	        	pos = $(this).val().length + pos;
-			// 	     	}
-			// 	     	range.moveEnd('character', pos);
-			// 	     	range.moveStart('character', pos);
-			// 	     	range.select();
-			// 	   	}
-			//   	}
-			// }(jQuery);
+			function setSelectionRange(input, selectionStart, selectionEnd) {
+			  if (input.setSelectionRange) {
+			    input.focus();
+			    input.setSelectionRange(selectionStart, selectionEnd);
+			  }
+			  else if (input.createTextRange) {
+			    var range = input.createTextRange();
+			    range.collapse(true);
+			    range.moveEnd('character', selectionEnd);
+			    range.moveStart('character', selectionStart);
+			    range.select();
+			  }
+			}
 
+			function setCaretToPos (input, pos) {
+			  setSelectionRange(input, pos, pos);
+			}
 		</script>
 	</body>
 </html>
