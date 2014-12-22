@@ -26,8 +26,8 @@
     "express": "~4.10.6",
     "nodemon": "~1.2.1",
     "request": "~2.51.0",
-    "socket.io": "~1.2.1",
     "jade": "~1.8.2",
-    "logger": "0.0.1"
+    "logger": "0.0.1",
+    "socket.io": "~1.0.6"
   }
 }

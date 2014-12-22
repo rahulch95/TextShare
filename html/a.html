@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+	<head>
+		<title>a</title>
+		<style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		body { font: 13px Helvetica, Arial; }
+		form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+		form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+		form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+		#messages { list-style-type: none; margin: 0; padding: 0; }
+		#messages li { padding: 5px 10px; }
+		#messages li:nth-child(odd) { background: #eee; }
+		#textarea {width: 1500px; height: 800px;}
+		</style>
+	</head>
+	<body>
+		<textarea id="textarea"></textarea>
+		<ul id="messages"></ul>
+		<form action="">
+			<input id="m" autocomplete="off" />
+			<button>Send</button>
+		</form>
+
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script> 
+			var socket = io();
+			var room = "b";
+
+			// title name is sent from the server to socket when it is first connected
+			socket.on('connect', function(){
+				// call the server-side function 'adduser' and send one parameter (value of prompt)
+				var room = $('title').val();
+				socket.emit('adduser', room);
+			});
+
+			//when ever something is recieved with title as "chat message" is recieved append msg to messages
+			socket.on('chat message', function(msg){
+				// $('#messages').append($('<li>').text(msg));
+				var cursorPosition = $('#textarea').getCursorPosition();
+				alert(cursorPosition);
+				$('#textarea').val(msg);
+				$('#textarea').setCursorPosition(cursorPosition);
+			});
+
+			// whenever something is sent emit it to room
+			$('form').submit(function(){
+				var data = $('#m').val();
+				socket.emit('chat message', data);
+				$('#m').val('');
+				return false;
+			});
+
+			$('#textarea').change(function(){
+				socket.emit('chat message', $('#textarea').val());
+			});
+			jQuery.fn.extend({
+				getCursorPosition: function() {
+				        var el = $(this).get(0);
+				        var pos = 0;
+				        if('selectionStart' in el) {
+				            pos = el.selectionStart;
+				        } else if('selection' in document) {
+				            el.focus();
+				            var Sel = document.selection.createRange();
+				            var SelLength = document.selection.createRange().text.length;
+				            Sel.moveStart('character', -el.value.length);
+				            pos = Sel.text.length - SelLength;
+				        }
+				        return pos;
+				    }
+			});
+			// new function ($, undefined) {
+			//     $.fn.getCursorPosition = function() {
+			//         var el = $(this).get(0);
+			//         var pos = 0;
+			//         if('selectionStart' in el) {
+			//             pos = el.selectionStart;
+			//         } else if('selection' in document) {
+			//             el.focus();
+			//             var Sel = document.selection.createRange();
+			//             var SelLength = document.selection.createRange().text.length;
+			//             Sel.moveStart('character', -el.value.length);
+			//             pos = Sel.text.length - SelLength;
+			//         }
+			//         return pos;
+			// 	}
+			// }(jQuery);
+			jQuery.fn.extend({
+				setCursorPosition: function(position){
+				    if(this.length == 0) return this;
+				    return $(this).setSelection(position, position);
+				}
+			});
+			// new function($) {
+			//     $.fn.setCursorPosition = function(pos) {
+			// 	    if (this.setSelectionRange) {
+			// 		    this.setSelectionRange(pos, pos);
+			// 	    } else if (this.createTextRange) {
+			// 	    	var range = this.createTextRange();
+			// 	     	range.collapse(true);
+			// 	     	if(pos < 0) {
+			// 	        	pos = $(this).val().length + pos;
+			// 	     	}
+			// 	     	range.moveEnd('character', pos);
+			// 	     	range.moveStart('character', pos);
+			// 	     	range.select();
+			// 	   	}
+			//   	}
+			// }(jQuery);
+
+		</script>
+	</body>
+</html>

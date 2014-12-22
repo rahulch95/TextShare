@@ -2,31 +2,43 @@ var express = require('express'),
     app = express(),
     http = require('http'),
     server = http.createServer(app),
-    request_lib = require('request'),
-    cheerio = require('cheerio'),
-    io = require('socket.io')(server);
+    io = require('socket.io').listen(server);
 
-// io.configure(function () { 
-//   io.set("transports", ["xhr-polling"]); 
-//   io.set("polling duration", 10); 
-// });
 
-io.on('connection', function(socket){
-  io.set("transports", ["xhr-polling"]);
-  io.set("polling duration", 10);
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
+    // request_lib = require('request'),
+    // cheerio = require('cheerio'),
+
+var clients = {};
+
+io.sockets.on('connection', function(socket){
+
+    socket.on('chat message', function(msg){
+      io.sockets.in(socket.room).emit('chat message', msg);
+    });
+    socket.on('adduser', function(room_name){
+      // store the room name in the socket session for this client
+      socket.room = room_name;
+      // send client to room 1
+      socket.join(room_name);
+      console.log("Room Name: " + room_name);
+      // // echo to client they've connected
+      // socket.emit('updatechat', 'SERVER', 'you have connected to room1');
+      // echo to room 1 that a person has connected to their room
+      // io.emit('chat message', 'New user has connected to room a');
+      socket.broadcast.to(room_name).emit('chat message', 'New user has connected to this room.');
+    });
 });
-
 
 app.set('port', (process.env.PORT || 5000));
 
-app.get('/', function(request, response) {
+app.get('/b', function(request, response) {
   response.sendFile(__dirname + '/html/textpad.html');
-
 });
 
+// for now if i type localhost:5000/a it should open a new 
+app.get('/a', function(request, response) {
+  response.sendFile(__dirname + '/html/a.html');
+});
 
 server.listen(app.get('port'), function() {
     console.log("Node app is running at port: " + app.get('port'));
