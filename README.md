@@ -13,7 +13,11 @@ http://textshare.elasticbeanstalk.com/yourUrl
 Or for your own Shared Text Editor, once you have cloned the repositiory (recommended: and deleted your **.git** file), run
 ```
 sudo npm install
+```
+```
 bower install
+```
+```
 node server.js
 ```
 Set up your own link, as well as your username and password for your MondoDB database in the server.js file where indicated.
@@ -28,6 +32,7 @@ The server runs on Node.js and uses the ExpressJS framework. I am using EJS inst
 - MongoDB
 - Mongoose
 - MongoLab
+
 ## What will be added soon?
 - Front=end.
 - BootStrap.
