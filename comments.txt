@@ -1,0 +1,27 @@
+comments:
+
+    // request_lib = require('request'),
+    // cheerio = require('cheerio'),
+
+
+// app.get('/b', function(request, response) {
+//   response.sendFile(__dirname + '/html/textpad.html');
+// });
+
+// // for now if i type localhost:5000/a it should open a.html
+// app.get('/a', function(request, response) {
+//   response.sendFile(__dirname + '/html/a.html');
+// });
+   // socket.broadcast.to(room_name).emit('chat message', 'New user has connected to this room.');
+
+`  // response.writeHead(200, {"Content-Type": "text/html"});
+  // response.write("<!DOCTYPE \"html\">");
+  // response.write("<html>");
+  // response.write("<head>");
+  // response.write("<title>Hello World Page</title>");
+  // response.write("</head>");
+  // response.write("<body>");
+  // response.write("Hello World! 5000");
+  // response.write("</body>");
+  // response.write("</html>");
+  // response.end();

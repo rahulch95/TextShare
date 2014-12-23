@@ -38,7 +38,7 @@
 			//when ever something is recieved with title as "chat message" is recieved append msg to messages
 			socket.on('chat message', function(msg){
 				// $('#messages').append($('<li>').text(msg));
-				var cursorPosition = $('#textarea').getCursorPosition();
+				var cursorPosition = $('#textarea').getCursorPosition() || 0;
 				$('#textarea').val(msg);
 				setCaretToPos(document.getElementById("textarea"), cursorPosition);
 

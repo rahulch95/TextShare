@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<title>Socket.IO chat</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font: 13px Helvetica, Arial; }
+button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+</style>
+</head>
+<body>
+<ul id="messages"></ul>
+<form action="">
+<button>Send</button>
+</form>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+var socket = io();
+$('form').submit(function(){
+	socket.emit('new url');
+	return false;
+});
+socket.on('new url generated', function(msg){
+	$('#messages').append($('<li>').text(msg));
+});
+</script>
+</body>
+</html>
