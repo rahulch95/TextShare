@@ -2,43 +2,49 @@ var express = require('express'),
     app = express(),
     http = require('http'),
     server = http.createServer(app),
+    ejs = require('ejs');
     io = require('socket.io').listen(server);
-
-
     // request_lib = require('request'),
     // cheerio = require('cheerio'),
 
+app.set('port', (process.env.PORT || 5000));
+app.set('view engine', 'ejs');
 var clients = {};
 
 io.sockets.on('connection', function(socket){
-    
+
     socket.on('chat message', function(msg){
-      io.sockets.in(socket.room).emit('chat message', msg);
+      io.sockets.to(socket.room).emit('chat message', msg);
     });
-    socket.on('adduser', function(room_name){
-      // store the room name in the socket session for this client
+
+    // when a message with add_user is sent we need to add the user to our list of sockets and make it join the required room
+    socket.on('add_user', function(room_name){
+      // store the room name (title of the page) in the socket session for this client
       socket.room = room_name;
-      // send client to room 1
       socket.join(room_name);
       console.log("Room Name: " + room_name);
-      // // echo to client they've connected
-      // socket.emit('updatechat', 'SERVER', 'you have connected to room1');
-      // echo to room 1 that a person has connected to their room
-      // io.emit('chat message', 'New user has connected to room a');
-      socket.broadcast.to(room_name).emit('chat message', 'New user has connected to this room.');
+      // socket.broadcast.to(room_name).emit('chat message', 'New user has connected to this room.');
     });
 });
 
-app.set('port', (process.env.PORT || 5000));
-
-app.get('/b', function(request, response) {
-  response.sendFile(__dirname + '/html/textpad.html');
+app.get('/', function(request, response) {
+  response.sendFile(__dirname + '/html/index.html');
 });
 
-// for now if i type localhost:5000/a it should open a new 
-app.get('/a', function(request, response) {
-  response.sendFile(__dirname + '/html/a.html');
+app.get('/:textId?', function(request, response) {
+  var textId = request.params.textId;
+  response.render(__dirname + '/html/index', {title: textId});
+
 });
+
+// app.get('/b', function(request, response) {
+//   response.sendFile(__dirname + '/html/textpad.html');
+// });
+
+// // for now if i type localhost:5000/a it should open a.html
+// app.get('/a', function(request, response) {
+//   response.sendFile(__dirname + '/html/a.html');
+// });
 
 server.listen(app.get('port'), function() {
     console.log("Node app is running at port: " + app.get('port'));
