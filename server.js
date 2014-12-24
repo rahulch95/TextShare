@@ -10,6 +10,7 @@ var express = require('express'),
 
 app.set('port', (process.env.PORT || 5000));
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/html/', 'css'));
 
 // connect to mongoose database
 
