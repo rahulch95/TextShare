@@ -1,4 +1,10 @@
 $(document).ready(function() {
+	// set size of textarea
+    var windowWidth = $(window).width();
+    var windowHeight =$(window).height();
+    $('textarea').css({'width':windowWidth ,'height':windowHeight });
+
+
 	var socket = io();
 	var room = "b";
 
@@ -16,14 +22,6 @@ $(document).ready(function() {
 		$('#textarea').val(msg);
 		setCaretToPos(document.getElementById("textarea"), cursorPosition);
 
-	});
-
-	// whenever something is sent emit it to room
-	$('form').submit(function(){
-		var data = $('#m').val();
-		socket.emit('chat message', data);
-		$('#m').val('');
-		return false;
 	});
 
 	$('#textarea').change(function(){
