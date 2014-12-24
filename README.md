@@ -1,10 +1,10 @@
 TextShare
 =========
 ## What is TextShare?
-TextShare is an online open-source shared text editor that runs on Node.js and Socket.io and uses JQuery. 
-It is currently under development, future implementation will redesign the web pages, UI as well as add a lot of features.
-The current implementation is just a test design and a way for me to learn more about Socket.io.
-Use the url generator on the main page to generate a new textpad for you. Type it and share the url with anyone (they will be able to edit it too).
+TextShare is an online open-source shared text editor that runs on Node.js and Socket.io. 
+It is currently under development, future implementation will redesign the web pages, the UI as well as add a lot of features.
+The current implementation is just a test design and a way for me to get familiar with Node.js and Socket.io.
+Use the url generator on the main page to generate a new textpad for you (or just type in your URL it's upto you). Type it and share the url with anyone (they will be able to edit it too).
 ## How do I use TextShare?
 Access the running sample:
 ```
