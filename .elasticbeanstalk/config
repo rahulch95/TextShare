@@ -1,14 +1,14 @@
 [global]
+ApplicationName=TextSharer
 AwsCredentialFile=/home/rhlc/.elasticbeanstalk/aws_credential_file
+DevToolsEndpoint=git.elasticbeanstalk.us-east-1.amazonaws.com
+EnvironmentName=TextSharer
 EnvironmentTier=WebServer::Standard::1.0
 EnvironmentType=SingleInstance
 InstanceProfileName=aws-elasticbeanstalk-ec2-role
-OptionSettingFile=/home/rhlc/node-example/temp-node-example/.elasticbeanstalk/optionsettings.TextSharer-env
+OptionSettingFile=/home/rhlc/node-example/temp-node-example/.elasticbeanstalk/optionsettings.TextSharer
 RdsEnabled=No
+Region=us-east-1
 ServiceEndpoint=https://elasticbeanstalk.us-east-1.amazonaws.com
 SolutionStack=32bit Amazon Linux 2014.03 v1.0.9 running Node.js
 
-ApplicationName=TextShaare
-DevToolsEndpoint=git.elasticbeanstalk.us-east-1.amazonaws.com
-EnvironmentName=TextShaare-env
-Region=us-east-1
