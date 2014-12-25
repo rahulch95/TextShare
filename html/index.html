@@ -6,11 +6,19 @@
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 		<script src="js/modernizr.custom.js"></script>
 	</head>
 	<body>
-		<p id="your_new_link"></p>
-		<!-- <button id="getUrl">Send</button> -->
+		<p id = "your_new_link"></p>
+		<br>
+		<h1>
+			Get started on your shared TextPad.<br>
+		</h1>
+		<h1>
+			Use the button below to generate your link.
+		</h1>
+		<br>
 		<div class="box">
 			<!-- progress button -->
 			<div class="progress-button elastic">
@@ -28,7 +36,8 @@
 					<path d="m35,35l-9.3,9.3"/>
 					<path d="m35,35l9.3,-9.3"/>
 				</svg>
-			</div><!-- /progress-button -->
+			</div>
+			<!-- /progress-button -->
 		</div>
 		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -49,6 +58,7 @@
 									clearInterval( interval );
 								}
 							}, 150 );
+
 					}
 				} );
 			} );

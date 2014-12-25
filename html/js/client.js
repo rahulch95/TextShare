@@ -14,8 +14,9 @@ $(document).ready(function(){
 		   	$('#waiting').attr("id", "getUrl");
 			socket.emit('new url');
 			
-		}, 6000);
+		}, 5500);
 	}).on("click","#take_me_there",function () {
+		$('#take_me_there').text('');
 	    window.location.replace(document.URL + $('#your_new_link').text());
 	});
 

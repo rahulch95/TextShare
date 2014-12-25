@@ -23,10 +23,6 @@ body {
 	padding: 25px 0;
 	font-family: 'Lato', Arial, sans-serif;
 }
-#your_new_link {
-	visibility: hidden;
-	text-align: center;
-}
 body::before,
 body::after {
 	content: '';
@@ -41,6 +37,19 @@ body::after {
 body::after {
 	top: auto;
 	bottom: 0;
+}
+
+#your_new_link {
+	visibility: hidden;
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+	text-indent: 20px;
+	font-family: 'Lato', sans-serif;
+	color: rgba(20,20,20, 0.7);
+	font-size: 70px;
 }
 
 a {
@@ -69,10 +78,10 @@ section h2 {
 
 .box {
     width:300px;
-    height:200px;
+    height:300px;
     position:absolute;
-    left:50%;
-    top:50%;
+    left:48%;
+    top:70%;
     margin:-100px 0 0 -150px;
 	width: 100%;
 	max-width: 720px;
