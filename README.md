@@ -8,7 +8,7 @@ Use the url generator on the main page to generate a new textpad for you (or jus
 ## How do I use TextShare?
 Access the running sample:
 ```
-http://textshare.elasticbeanstalk.com/yourUrl 
+http://textshare.elasticbeanstalk.com/
 ``` 
 Or for your own Shared Text Editor, once you have cloned the repositiory (recommended: and deleted your **.git** file), run
 ```
