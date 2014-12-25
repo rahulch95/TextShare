@@ -1,8 +1,9 @@
 $(document).ready(function() {
+
 	// set size of textarea
     var windowWidth = $(window).width();
-    var windowHeight =$(window).height();
-    $('textarea').css({'width':windowWidth ,'height':windowHeight });
+    var windowHeight = $(window).height();
+    $('#textarea').css({'width':windowWidth ,'height':windowHeight });
 
 
 	var socket = io();
