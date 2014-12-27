@@ -2,12 +2,24 @@
 	<head>
 		<title id='textId'><%= title %></title>
 		<link rel="stylesheet" type="text/css" href="css/textpad_style.css" />
-		
+		<style type="text/css" media="screen">
+		    #editor { 
+		    	font-size: 20px;
+		        position: absolute;
+		        top: 0;
+		        right: 0;
+		        bottom: 0;
+		        left: 0;
+		    }
+		</style>
 	</head>
 	<body>
-		<textarea id="textarea"></textarea>
+
+		<div id="editor"></div>
+
 		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script src="js/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/textpad.js"> </script>
 	</body>
 </html>

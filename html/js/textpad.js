@@ -1,64 +1,43 @@
 $(document).ready(function() {
 
-	// set size of textarea
-    var windowWidth = $(window).width();
-    var windowHeight = $(window).height();
-    $('#textarea').css({'width':windowWidth ,'height':windowHeight });
 
+    var editor = ace.edit("editor");
+
+    editor.setTheme("ace/theme/xcode");
+    editor.getSession().setMode("ace/mode/javascript");
 
 	var socket = io();
-	var room = "b";
+	var room = "";
 
-	// title name is sent from the server to socket when it is first connected
-	socket.on('connect', function(){
-		// call the server-side function 'adduser' and send one parameter (value of prompt)
+	// title name is sent from the server to socket when it is first connected (the html of textId)
+	socket.on('connect', function() {
 		var room = document.getElementById('textId').innerHTML;
 		socket.emit('add_user', room);
+		socket.room = room;
+		i = 1;
 	});
 
-	//when ever something is recieved with title as "chat message" is recieved append msg to messages
+	// whenever "chat message" is received change the value of the text inside the editor.
 	socket.on('chat message', function(msg){
-		// $('#messages').append($('<li>').text(msg));
-		var cursorPosition = $('#textarea').getCursorPosition() || 0;
-		$('#textarea').val(msg);
-		setCaretToPos(document.getElementById("textarea"), cursorPosition);
+
+		var x = editor.getCursorPosition();
+		editor.setValue(msg, 1);
+		editor.moveCursorTo(x.row, x.column, false);
+
 
 	});
 
-	$('#textarea').change(function(){
-		socket.emit('chat message', $('#textarea').val());
-	});
-	jQuery.fn.extend({
-		getCursorPosition: function() {
-		        var el = $(this).get(0);
-		        var pos = 0;
-		        if('selectionStart' in el) {
-		            pos = el.selectionStart;
-		        } else if('selection' in document) {
-		            el.focus();
-		            var Sel = document.selection.createRange();
-		            var SelLength = document.selection.createRange().text.length;
-		            Sel.moveStart('character', -el.value.length);
-		            pos = Sel.text.length - SelLength;
-		        }
-		        return pos;
-		    }
-	});
-	function setSelectionRange(input, selectionStart, selectionEnd) {
-	  if (input.setSelectionRange) {
-	    input.focus();
-	    input.setSelectionRange(selectionStart, selectionEnd);
-	  }
-	  else if (input.createTextRange) {
-	    var range = input.createTextRange();
-	    range.collapse(true);
-	    range.moveEnd('character', selectionEnd);
-	    range.moveStart('character', selectionStart);
-	    range.select();
-	  }
-	}
+	var current_message;
 
-	function setCaretToPos (input, pos) {
-	  setSelectionRange(input, pos, pos);
-	}
+	function sync(previous_message) {
+		current_message = editor.getValue();
+
+		if (current_message != previous_message) {
+			socket.emit('chat message', current_message);
+		}
+		setTimeout(function() {sync(current_message);}, 1);
+	};
+
+	sync(editor.getValue());
+	
 });
