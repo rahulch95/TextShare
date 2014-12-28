@@ -9,8 +9,11 @@ Use the url generator on the main page to generate a new textpad for you (or jus
 Access the running sample:
 ```
 http://textshare.elasticbeanstalk.com/
-``` 
-Or for your own Shared Text Editor, once you have cloned the repositiory (recommended: and deleted your **.git** file), run
+``` or
+```
+http://textsharer-mgyir3zy3p.elasticbeanstalk.com
+```
+Or for your own Shared Code Editor, once you have cloned the repositiory (recommended: and deleted your **.git** file), run
 ```
 sudo npm install
 ```
