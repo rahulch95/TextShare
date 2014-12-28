@@ -9,17 +9,19 @@
 		        top: 0;
 		        right: 0;
 		        bottom: 0;
-		        left: 0;
+		        left: 200px;
 		    }
 		</style>
 	</head>
 	<body>
-
+	<select name="Select Mode" id="select-mode"></select> <br>
+	<select name="Select Color Scheme" id="select-color-scheme"></select>
 		<div id="editor"></div>
 
 		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		<script src="js/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/textpad.js"> </script>
+		<script src="js/populate-options.js"></script>
+		<script src="js/textpad.js"></script>
 	</body>
 </html>

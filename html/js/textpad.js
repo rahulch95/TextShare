@@ -2,12 +2,50 @@ $(document).ready(function() {
 
 
     var editor = ace.edit("editor");
-
-    editor.setTheme("ace/theme/xcode");
-    editor.getSession().setMode("ace/mode/javascript");
-
+	var current_message;
 	var socket = io();
 	var room = "";
+	var modes;
+	var colors;
+
+    editor.setTheme("ace/theme/chrome");
+    editor.getSession().setMode("ace/mode/text");
+
+	$.getJSON('../modes.json', function(all_modes) {
+		modes = all_modes;
+		$.each(all_modes, function(key, value) {
+			$('#select-mode').append("<option>" + key  + "</option>");
+		});
+	});
+
+	$.getJSON('../colors.json', function(all_colors) {
+		colors = all_colors;
+		$.each(all_colors, function(key, value) {
+			$('#select-color-scheme').append("<option>" + key  + "</option>");
+		});
+	});
+
+
+    $('#select-mode').change(function() {
+    	str = "";
+   	    $( "#select-mode option:selected" ).each(function() {
+	      str += $( this ).text();
+    	});
+    	alert(str);
+    	alert(modes[str]);
+    	editor.getSession().setMode("ace/mode/" + modes[str]);
+    });
+
+
+    $('#select-color-scheme').change(function() {
+    	str = "";
+   	    $( "#select-color-scheme option:selected" ).each(function() {
+	      str += $( this ).text();
+    	});
+    	alert(str);
+    	alert(colors[str]);
+    	editor.setTheme("ace/theme/" + colors[str]);
+    });
 
 	// title name is sent from the server to socket when it is first connected (the html of textId)
 	socket.on('connect', function() {
@@ -24,10 +62,7 @@ $(document).ready(function() {
 		editor.setValue(msg, 1);
 		editor.moveCursorTo(x.row, x.column, false);
 
-
 	});
-
-	var current_message;
 
 	function sync(previous_message) {
 		current_message = editor.getValue();
