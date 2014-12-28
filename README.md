@@ -33,6 +33,7 @@ The server runs on Node.js and uses the ExpressJS framework. I am using EJS inst
 - JQuery
 - MongoDB/Mongoose
 - MongoLab
+
 ## What will be added soon?
 - Front-end.
 - BootStrap.
