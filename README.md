@@ -9,7 +9,8 @@ Use the url generator on the main page to generate a new textpad for you (or jus
 Access the running sample:
 ```
 http://textshare.elasticbeanstalk.com/
-``` or
+``` 
+or
 ```
 http://textsharer-mgyir3zy3p.elasticbeanstalk.com
 ```
