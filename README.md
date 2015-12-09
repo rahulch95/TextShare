@@ -7,14 +7,8 @@ The current implementation is just a test design and a way for me to get familia
 Use the url generator on the main page to generate a new textpad for you (or just type in your URL it's upto you). Type it and share the url with anyone (they will be able to edit it too). 
 ## How do I use TextShare?
 Access the running sample:
-```
-http://textshare.elasticbeanstalk.com/
-``` 
-or
-```
-http://textsharer-mgyir3zy3p.elasticbeanstalk.com
-```
-Or for your own Shared Code Editor, once you have cloned the repositiory (recommended: and deleted your **.git** file), run
+
+Once you have cloned the repositiory (recommended: and deleted your **.git** file), run
 ```
 sudo npm install
 ```
